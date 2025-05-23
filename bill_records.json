@@ -1,0 +1,29 @@
+[
+    {
+        "timestamp": "24-05-2025 01:10:43",
+        "table_number": 11,
+        "bill_amount": 435.0,
+        "tip_amount": 5.0,
+        "total_bill": 479.59,
+        "no_of_people": 3,
+        "amount_per_person": 159.86
+    },
+    {
+        "timestamp": "24-05-2025 01:11:43",
+        "table_number": 4,
+        "bill_amount": 1010.0,
+        "tip_amount": 8.0,
+        "total_bill": 1145.34,
+        "no_of_people": 7,
+        "amount_per_person": 163.62
+    },
+    {
+        "timestamp": "24-05-2025 01:12:06",
+        "table_number": 7,
+        "bill_amount": 2345.0,
+        "tip_amount": 23.0,
+        "total_bill": 3028.57,
+        "no_of_people": 12,
+        "amount_per_person": 252.38
+    }
+]
