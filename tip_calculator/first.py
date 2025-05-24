@@ -7,24 +7,36 @@ while True:
     try:
         table_number = int(input("Enter the table number:\n"))
         bill_amount = float(input("Enter the bill amount:\n"))
-        tip = float(input("What percentage of bill you want to tip:\n"))
+        tip_percentage = float(input("What percentage of bill you want to tip:\n"))
     except ValueError :
         print("Please enter a valid input")
         continue
-    
-    bill_without_tax = bill_amount+(tip*bill_amount/100)
+    tip_amount = tip_percentage*bill_amount/100
+    bill_without_tax = bill_amount+(tip_percentage*bill_amount/100)
     #Below we are adding local food tax which is 5%
     local_tax = 5*bill_without_tax/100
     total_bill = bill_without_tax + local_tax
+
     try:
-        no_of_people = int(input("In how many people you want to split the bill:\n"))
+        no_of_people = int(input("Total number of people on the table:\n"))
     except ValueError:
         print("No. of people must be an integer")
         continue
     if no_of_people<=0:
         print("number of people must be greter than zero")
         continue
-    after_split = total_bill/no_of_people
+
+
+    split = input("Do you want to split the bill:yes / no\n").strip().lower()
+    if split=="yes":
+        after_split = total_bill/no_of_people
+    elif split =="no":
+        after_split = None
+    else:
+        print("Enter a valid input")
+        continue
+
+
     print()
     print()
     print()
@@ -33,11 +45,14 @@ while True:
         "timestamp" : datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
         "table_number" :table_number,
         "bill_amount" : bill_amount,
-        "tip_amount" : tip,
+        "tip_percentage" : tip_percentage,
+        "tip_amount" : tip_amount,
+        "bill_without_tax" : bill_without_tax,
+        "local_tax" : round(local_tax,2),
         "total_bill" : round(total_bill,2),
         "no_of_people" : no_of_people,
-        "amount_per_person" : round(after_split,2)
-        }
+        "amount_per_person" : round(after_split,2) if after_split is not None else None 
+    }
 
 
     filename = "bill_records.json"
@@ -66,7 +81,10 @@ while True:
     print(f"Total bill without tax for table no. {table_number} is ${bill_without_tax:.2f}")
     print(f"local food tax on bill is ${local_tax:.2f}")
     print(f"Total bill for table no. {table_number} is ${total_bill:.2f}")
-    print(f"Bill amount for each person is ${after_split:.2f}")
+    if after_split:
+        print(f"Bill amount for each person is ${after_split:.2f}")
+    else:
+        pass
     print()
     print()
     print("---Thank you----")
